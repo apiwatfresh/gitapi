@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Git API</title>
+  </head>
+  <style>
+    .avatar-img {
+      border: 5px solid blue;
+      border-radius: 50%;
+      width: 200px;
+      height: auto;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .names {
+      text-align: center;
+      color: blue;
+    }
+  </style>
+  <body>
+    <script>
+      request = fetch("https://api.github.com/users/apiwatfresh")
+        .then((response) => response.json())
+        .then((data) => {
+          const names = document.createElement("h1");
+          const linkEls = document.createElement("a");
+          linkEls.innerHTML = data.name;
+          linkEls.href = data.html_url;
+          linkEls.target = "_blank";
+          names.appendChild(linkEls);
+          names.className = "names";
+          document.body.appendChild(names);
+
+          const avatarEls = document.createElement("img");
+          avatarEls.src = data.avatar_url;
+          avatarEls.target = "_blank";
+          avatarEls.className = "avatar-img";
+          avatarEls.addEventListener("click", function () {window.open(data.html_url,'_blank')});
+          document.body.appendChild(avatarEls);
+        });
+    </script>
+    <h1></h1>
+  </body>
+</html>
